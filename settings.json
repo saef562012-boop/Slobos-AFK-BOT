@@ -8,7 +8,7 @@
   "server": {
     "ip": "dynamic-8.magmanode.com",
     "port": 25753,
-    "version": "1.26.14.1"
+    "version": ""
   },
   "position": {
     "enabled": true,
