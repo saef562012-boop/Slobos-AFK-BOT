@@ -6,8 +6,8 @@
     "type": "offline"
   },
   "server": {
-    "ip": "gold.magmanode.com",
-    "port": 33384,
+    "ip": "dynamic-8.magmanode.com",
+    "port": 25710,
     "version": "1.21.1"
   },
   "position": {
