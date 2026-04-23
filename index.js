@@ -3,26 +3,27 @@ const settings = require('./settings.json');
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res) => res.send('Bot is Alive!'));
+app.get('/', (req, res) => res.send('Bot is Online!'));
 app.listen(process.env.PORT || 3000);
 
 function createBot() {
-    console.log("🔄 جاري محاولة الدخول بدون فحص الإصدار...");
+    console.log("🔄 جاري الاتصال... سأقوم بتخطي فحص الإصدار يدوياً");
     
     const client = bedrock.createClient({
         host: settings.server.ip,
         port: settings.server.port,
         username: settings["bot-account"].username,
-        offline: true
-        // لاحظ: لم نضع سطر الإصدار هنا نهائياً لنتجنب الخطأ الأحمر
+        offline: true,
+        // تم حذف سطر الإصدار نهائياً لإيقاف الخطأ الأحمر
+        skipPing: true
     });
 
     client.on('spawn', () => {
-        console.log("✅ أخيراً! البوت دخل السيرفر.");
+        console.log("✅ أخيراً! البوت دخل السيرفر بنجاح.");
     });
 
     client.on('error', (err) => {
-        console.log("❌ محاولة أخرى... السبب: " + err.message);
+        console.log("❌ خطأ في الاتصال: " + err.message);
     });
 
     client.on('close', () => {
