@@ -1,5 +1,4 @@
 const bedrock = require('bedrock-protocol');
-const settings = require('./settings.json');
 const express = require('express');
 const app = express();
 
@@ -7,23 +6,23 @@ app.get('/', (req, res) => res.send('Bot is Online!'));
 app.listen(process.env.PORT || 3000);
 
 function createBot() {
-    console.log("🔄 جاري الاتصال... سأقوم بتخطي فحص الإصدار يدوياً");
+    console.log("🔄 جاري الاقتحام المباشر...");
     
     const client = bedrock.createClient({
-        host: settings.server.ip,
-        port: settings.server.port,
-        username: settings["bot-account"].username,
+        host: "dynamic-8.magmanode.com", // الآيبي مباشرة
+        port: 25753,                     // البورت مباشرة
+        username: "Kareem_Bot",          // اسم جديد بدون مسافات
         offline: true,
-        // تم حذف سطر الإصدار نهائياً لإيقاف الخطأ الأحمر
         skipPing: true
+        // لاحظ: لا يوجد سطر اصدار نهائياً هنا
     });
 
     client.on('spawn', () => {
-        console.log("✅ أخيراً! البوت دخل السيرفر بنجاح.");
+        console.log("✅ أخيراً! البوت دخل السيرفر.");
     });
 
     client.on('error', (err) => {
-        console.log("❌ خطأ في الاتصال: " + err.message);
+        console.log("❌ محاولة أخرى... " + err.message);
     });
 
     client.on('close', () => {
