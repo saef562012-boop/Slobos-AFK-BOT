@@ -2,37 +2,31 @@ const bedrock = require('bedrock-protocol');
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res) => res.send('Bot is Online!'));
+app.get('/', (req, res) => res.send('Bot is Working!'));
 app.listen(process.env.PORT || 3000);
 
-function createBot() {
-    console.log("🔄 جاري الاتصال المباشر بالسيرفر...");
-    
-    try {
-        const client = bedrock.createClient({
-            host: "dynamic-8.magmanode.com",
-            port: 25753,
-            username: "Kareem_AFK",
-            offline: true,
-            skipPing: true
-            // ملاحظة: لا يوجد أي إشارة للإصدار هنا، سيتم تخطيه إجبارياً
-        });
+console.log("🔄 محاولة اقتحام السيرفر...");
 
-        client.on('spawn', () => {
-            console.log("✅ مبروك! البوت دخل السيرفر أخيراً.");
-        });
+function startBot() {
+    const client = bedrock.createClient({
+        host: "dynamic-8.magmanode.com",
+        port: 25753,
+        username: "Dura_AFK", // اسم جديد ومميز
+        offline: true,
+        version: "1.20.80" // سنستخدم هذا الإصدار كقناع للدخول
+    });
 
-        client.on('error', (err) => {
-            console.log("⚠️ تنبيه: " + err.message);
-        });
+    client.on('spawn', () => {
+        console.log("✅ أخيراً! البوت دخل السيرفر بنجاح.");
+    });
 
-        client.on('close', () => {
-            setTimeout(createBot, 5000);
-        });
-    } catch (e) {
-        console.log("❌ فشل الاتصال، سأحاول مجدداً...");
-        setTimeout(createBot, 5000);
-    }
+    client.on('error', (err) => {
+        console.log("⚠️ محاولة اتصال جديدة...");
+    });
+
+    client.on('close', () => {
+        setTimeout(startBot, 5000);
+    });
 }
 
-createBot();
+startBot();
