@@ -6,8 +6,9 @@
     "type": "offline"
   },
   "server": {
-    "ip": "Kareem56u.aternos.me",
-    "port": 27510,
+    "ip": "bristlemouth.aternos.host",
+    "port": 27510
+  ,
     "version": "1.21.1"
   },
   "position": {
