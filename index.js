@@ -7,22 +7,23 @@ app.get('/', (req, res) => res.send('Bot is Online!'));
 app.listen(process.env.PORT || 3000);
 
 function createBot() {
-    console.log("🔄 جاري محاولة الاتصال...");
+    console.log("🔄 جاري الاقتحام... انتظر قليلاً");
+    
     const client = bedrock.createClient({
         host: settings.server.ip,
         port: settings.server.port,
         username: settings["bot-account"].username,
         offline: true,
-        // حذفنا سطر الإصدار هنا ليقوم البوت باختياره تلقائياً
+        // هنا السر: حذفنا سطر الإصدار تماماً لكي لا يحدث تعارض
+        skipPing: true 
     });
 
     client.on('spawn', () => {
-        console.log("✅ أخيراً! البوت دخل السيرفر بنجاح.");
+        console.log("✅ مبروك! البوت داخل السيرفر الآن.");
     });
 
     client.on('error', (err) => {
-        console.log("❌ حدث خطأ: " + err.message);
-        // إذا فشل بسبب الإصدار، سيحاول مرة أخرى تلقائياً
+        console.log("❌ محاولة أخرى... (السبب: " + err.message + ")");
     });
 
     client.on('close', () => {
